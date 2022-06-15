@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSource{
     var result:[Result?] = []
         
@@ -17,11 +17,12 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         tableView.delegate = self
         tableView.dataSource = self
+        
   
     }
 
     func parse(){
-        guard let path = Bundle.main.path(forResource: "books", ofType: "json")else{
+        guard let path = Bundle.main.path(forResource: "AmazonBooks", ofType: "json")else{
             return
         }
         let url = URL(fileURLWithPath:path)
@@ -57,9 +58,16 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         // set the text from the data model
         cell.title?.text = self.result[indexPath.row]?.title
-        cell.author?.text = self.result[indexPath.row]?.author
-        cell.year?.text = String(self.result[indexPath.row]?.year ?? 0)
-        
+        cell.author?.text = self.result[indexPath.row]?.isbn ?? ""
+        cell.year?.text = self.result[indexPath.row]?.shortDescription ?? ""
+        if let uri = self.result[indexPath.row]?.thumbnailUrl{
+            Alamofire.request(uri).response { (response) in
+                cell.viewImage?.image = UIImage(data: response.data!, scale:1)
+             }
+        }
+            
+      
+
         return cell
     }
     
