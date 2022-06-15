@@ -15,7 +15,7 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.viewDidLoad()
         parse()
         // Do any additional setup after loading the view.
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
         // (optional) include this line if you want to remove the extra empty cell divider lines
         // self.tableView.tableFooterView = UIView()
@@ -59,12 +59,14 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create a new cell if needed or reuse an old one
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTable",for: indexPath) as! ListTable
         
         // set the text from the data model
-        cell?.textLabel?.text = self.result[indexPath.row]?.title
+        cell.title?.text = self.result[indexPath.row]?.title
+        cell.author?.text = self.result[indexPath.row]?.author
+        cell.year?.text = String(self.result[indexPath.row]?.year ?? 0)
         
-        return cell!
+        return cell
     }
     
     // method to run when table view cell is tapped
