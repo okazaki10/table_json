@@ -64,6 +64,8 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
             Alamofire.request(uri).response { (response) in
                 cell.viewImage?.image = UIImage(data: response.data!, scale:1)
              }
+        }else{
+            cell.viewImage?.image = UIImage(named:"MicrosoftTeams-image")
         }
             
       
