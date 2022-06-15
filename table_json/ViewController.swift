@@ -14,13 +14,7 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         parse()
-        // Do any additional setup after loading the view.
-        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        
-        // (optional) include this line if you want to remove the extra empty cell divider lines
-        // self.tableView.tableFooterView = UIView()
-        
-        // This view controller itself will provide the delegate methods and row data for the table view.
+
         tableView.delegate = self
         tableView.dataSource = self
   
@@ -48,7 +42,7 @@ class ViewController:UIViewController, UITableViewDelegate, UITableViewDataSourc
  
     
     // cell reuse id (cells that scroll out of view can be reused)
-    let cellReuseIdentifier = "cell"
+
     
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
